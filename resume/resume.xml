@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resume PUBLIC "-//Sean Kelly//DTD Resume 1.5.1//EN"
+  "http://xmlresume.sourceforge.net/dtd/resume.dtd">
+
+<resume>
+  <header>
+    <name>
+      <firstname>Vasile</firstname>
+      <surname>Jureschi</surname>
+    </name>
+    <address>
+      <street>Traian Mosoiu 48</street>
+      <city>Cluj-Napoca</city>
+      <state>Cluj, Romania</state>
+    </address>
+    <contact>
+      <phone>+40747391386</phone>
+      <email>vasile.jureschi@gmail.com</email>
+      <url>http://www.ohloh.net/accounts/rododendron</url>
+    </contact>
+  </header>
+
+  <objective>
+    <para>I really, really, really, <emphasis>really</emphasis> want a
+      job.
+    </para>
+  </objective>
+
+  <history>
+    <job>
+      <jobtitle>Software Developer</jobtitle>
+      <employer>Neusoft Mobile Solutions</employer>
+      <period>
+	<from>
+	  <date>
+	    <month>April</month>
+	    <year>2010</year>
+	  </date>
+	</from>
+	<to>
+	  <present/>
+	</to>
+      </period>
+      <description>
+	<para>Java software development and build management.</para>
+      </description>
+    </job>
+
+    <job>
+      <jobtitle>C++ Developer</jobtitle>
+      <employer>Activeeon</employer>
+      <period>
+	<from>
+	  <date>
+	    <month>May</month>
+	    <year>2009</year>
+	  </date>
+	</from>
+	<to>
+	  <date>
+	    <month>March</month>
+	    <year>2010</year>
+	  </date>
+	</to>
+      </period>
+      <description>
+	<para>Developed the ProActive Linux Agent. 
+	</para>
+      </description>
+    </job>
+    
+
+    <job>
+      <jobtitle>Documentation toolchain maintainer</jobtitle>
+      <employer>INRIA</employer>
+      <period>
+	<from>
+	  <date>
+	    <month>May</month>
+	    <year>2009</year>
+	  </date>
+	</from>
+	<to>
+	  <date>
+	    <month>March</month>
+	    <year>2010</year>
+	  </date>
+	</to>
+      </period>
+      <description>
+	<para>Maintened the documentation Ant scripts and wrote Java code for parsing source code. 
+	</para>
+      </description>
+    </job>
+
+    
+  </history>
+
+  <academics>
+    <degrees>
+      <degree>
+	<level>BA</level>
+	<major>Computer Science</major>
+	<date>
+	  <month>August</month>
+	  <year>2005</year>
+	</date>
+	<institution>Babes-Bolyai University, Cluj</institution>
+      </degree>
+    </degrees>
+  </academics>
+
+  <skillarea>
+    <title>Programming languages</title>
+    <skillset>
+      <skill>Java</skill>
+      <skill>JavaScript</skill>
+      <skill>Ant</skill>
+      <skill>XSLT</skill>	
+      <skill>C</skill>
+    </skillset>
+  </skillarea> 
+    
+  <skillarea>
+    <title>Technologies</title>
+    <skillset>
+      <skill>Android</skill>
+      <skill>EJB3</skill>
+      <skill>Hibernate</skill>
+      <skill>WebOS</skill>	
+    </skillset>
+  </skillarea> 
+    
+  <skillarea>
+    <title>Languages</title>
+    <skillset>
+      <skill>Romanian - native</skill>
+      <skill>English - fluent</skill>
+      <skill>French - Basic</skill>
+    </skillset>
+  </skillarea>
+
+    
+</resume>

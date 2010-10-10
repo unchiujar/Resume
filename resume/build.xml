@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="all" name="Resume">
+<!-- ====================================================================
+ build.xml: A "Makefile" for the Ant build tool.
+
+USAGE:
+ To create example1.html, example1.txt, example1.fo, and example1.pdf 
+ from example1.xml, with Italian localization and a4 paper size, use 
+ this command:
+       ant -Dresume=example1 -Dcountry=it -Dpapersize=a4
+ To generate just the html version of cv.xml with UK localization, use 
+ this command:
+       ant html -Dresume=cv -Dcountry=uk
+ To remove all generated files, use this command:
+       ant clean
+ To generate a filtered example resume targeted at the foodservice and
+ construction industries, use these commands:
+	ant filter -Dresume=example2 -Dfilter_targets="foodservice carpentry"
+
+==================================================================== -->
+<!-- 
+================================================================
+     General Options
+================================================================ -->
+<!-- The name and extension of the XML file containing your resume -->
+  <property name="resume" value="resume"/>
+  <property name="resume.extension" value="xml"/>
+<!-- Options: br de fr it nl uk us es -->
+  <property name="country" value="us"/>
+<!-- Options: letter for country=us, a4 for others -->
+  <property name="papersize" value="letter"/>
+  <property name="xsl.base" value="../xsl"/> 
+
+<!-- Targeting Options:
+
+ Element filtering allows you to create targeted resumes.
+ You can create your own targets; just specify them in your resume.xml
+ file with the "targets" attribute.  In this example, the foodservice
+ AND carpentry elements will be included in the output, but not the
+ elements targeted to other jobs.  Untargeted elements (those with no
+ "targets" attribute) are always included.
+ Take a look at example2.xml and try changing the filter targets to get a
+ feel for how the filter works. -->
+  <property name="filter.processor" value="net.sourceforge.xmlresume.filter.Filter"/>
+  <property name="filter.targets" value="foodservice carpentry"/>
+  <property name="filter.extension" value="-filtered"/>
+<!--
+================================================================
+     Stylesheets:
+================================================================ -->
+  <property name="html_style" value="${xsl.base}/output/${country}-html.xsl"/>
+  <property name="text_style" value="${xsl.base}/output/${country}-text.xsl"/>
+  <property name="fo_style" value="${xsl.base}/output/${country}-${papersize}.xsl"/>
+<!--
+================================================================
+     END OF USER-CONFIGURABLE PARAMETERS
+================================================================ -->
+
+<!--================ Target Text ================-->
+<target name="txt" description="Makes a plain-text version of the resume.">
+	<xslt basedir="doc" destdir="build/doc"
+       	 style="${text_style}"
+	in="${resume}.${resume.extension}"
+	out="${resume}.txt"/>
+</target>
+
+<!--================ Target HTML ================-->
+<target name="html" description="Makes an HTML version of the resume.">
+	<xslt basedir="doc" destdir="build/doc"
+       	 style="${html_style}"
+	in="${resume}.${resume.extension}"
+	out="${resume}.html"/>
+</target>
+
+<!--================ Target FO ================-->
+<target name="fo" description="Makes an FO version of the resume.">
+	<xslt basedir="doc" destdir="build/doc"
+       	 style="${fo_style}"
+	in="${resume}.${resume.extension}"
+	out="${resume}.fo"/>
+</target>
+
+<!--================ FOP Task definition ================-->
+<property name="fop.home" value="/home/vasile/Desktop/resume-1_5_1/jars/fop-1.0"/>
+<taskdef name="fop" 
+         classname="org.apache.fop.tools.anttasks.Fop">
+  <classpath>
+    <fileset dir="${fop.home}/lib">
+      <include name="*.jar"/>
+    </fileset>
+    <fileset dir="${fop.home}/build">
+      <include name="fop.jar"/>
+    </fileset>
+  </classpath>
+</taskdef>
+
+<!--================ Target PDF ================-->
+ <target depends="fo" name="pdf" description="Makes a PDF version of the resume.">
+   <fop format="application/pdf" 
+        fofile="${resume}.fo"
+        outfile="resume.pdf" />
+</target>
+
+<!--================ Target Filter ================-->
+  <target name="filter" description="Makes a filtered version of a resume.">
+    <echo message="Writing filtered resume to ${resume}${filter.extension}"/>
+    <java classname="${filter.processor}">
+      <arg value="-in"/>
+      <arg value="${resume}.${resume.extension}"/>
+      <arg value="-out"/>
+      <arg value="${resume}${filter.extension}.${resume.extension}"/>
+      <arg value="${filter.targets}"/>
+    </java>
+  </target>
+  
+<!--================ Target All ================-->
+  <target depends="txt,html,fo,pdf" name="all" 
+	description="Makes all known formats of the resume.">
+	<echo message="XXX resume = ${resume}"/>
+  </target>
+  
+<!--================ Target Clean ================-->
+  <target description="Clean all build products." name="clean">
+    <delete file="${resume}.txt"/>
+    <delete file="${resume}.html"/>
+    <delete file="${resume}.fo"/>
+    <delete file="${resume}.pdf"/>
+    <delete file="${resume}${filter.extension}.txt"/>
+    <delete file="${resume}${filter.extension}.html"/>
+    <delete file="${resume}${filter.extension}.fo"/>
+    <delete file="${resume}${filter.extension}.pdf"/>
+    <delete file="${resume}${filter.extension}.${resume.extension}"/>
+  </target>
+</project>
