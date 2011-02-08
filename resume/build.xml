@@ -81,7 +81,7 @@ USAGE:
 </target>
 
 <!--================ FOP Task definition ================-->
-<property name="fop.home" value="/home/vasile/Desktop/resume-1_5_1/jars/fop-1.0"/>
+<property name="fop.home" value="../jars/fop-1.0"/>
 <taskdef name="fop" 
          classname="org.apache.fop.tools.anttasks.Fop">
   <classpath>
